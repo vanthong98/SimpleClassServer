@@ -110,7 +110,7 @@ public class ClassServerController {
             return;
         }
         messageTextArea.clear();
-        Dispatcher.sendToClassMessage("Teacher", text);
+        Dispatcher.dispatchToClassMessage("Teacher", text);
     }
 
     public void onSendFileButtonClick(ActionEvent actionEvent) throws IOException {
@@ -125,7 +125,7 @@ public class ClassServerController {
             byte[] fileContent = Files.readAllBytes(path);
             var base64 = Base64.getEncoder().encodeToString(fileContent);
             Dispatcher.send(Common.Teacher,selectedFile.getName() + ";" +  Files.probeContentType(path) + ";" + base64, MessageType.SendFile);
-            Dispatcher.sendToClassMessage("Teacher", "Sending file ... [" + selectedFile.getName() +"]" );
+            Dispatcher.dispatchToClassMessage("Teacher", "Sent file [" + selectedFile.getName() +"]" );
         } else {
             Logger.log("No file selected");
         }

@@ -33,9 +33,13 @@ public class Dispatcher extends Thread {
         _classMessageTextArea = classMessageTextArea;
     }
 
+    public static void dispatchToClassMessage(String sender, String message) {
+        Platform.runLater(() -> sendToClassMessage(sender, message));
+        Dispatcher.send(sender, message, MessageType.SendMessage);
+    }
+
     public static void sendToClassMessage(String sender, String message) {
         _classMessageTextArea.appendText(sender + " (" +  Common.getCurrentTime() + ")" + ":" + Common.NewLine + message + Common.NewLine);
-        Dispatcher.send(sender, message, MessageType.SendMessage);
     }
 
     private static String getMessage(){
@@ -64,7 +68,11 @@ public class Dispatcher extends Thread {
         if (QUEUES.isEmpty()){
             return clientName + "_" + "1";
         }
-        var maxClientId = Collections.max(QUEUES.keySet().stream().map(Integer::parseInt).toList());
+
+        var maxClientId = Collections.max(QUEUES.keySet().stream()
+                .map(clientId -> clientId.split("_")[1])
+                .map(Integer::parseInt).toList());
+
         var newClientId = maxClientId + 1;
 
         return clientName + "_" + newClientId;

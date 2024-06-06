@@ -15,19 +15,19 @@
         <Button fx:id="startServerButton" style="-fx-font-weight: bold; -fx-text-fill: green;" onAction="#onStartServerButtonClick" text="START" />
         <Button fx:id="stopServerButton" disable="true" style="-fx-font-weight: bold; -fx-text-fill: red;" onAction="#onStopServerButtonClick" text="STOP" />
     </HBox>
-    <HBox prefHeight="465" prefWidth="920" spacing="10">
-        <VBox prefWidth="400" spacing="5">
+    <HBox prefHeight="365" prefWidth="670" spacing="10">
+        <VBox prefWidth="300" spacing="5">
             <Label text="Teacher board"/>
-            <Pane prefHeight="400" prefWidth="400" style="-fx-border-style: solid; -fx-border-color: red">
-                <Canvas disable="true" fx:id="canvas" height="400" width="400"  onMouseDragged="#onCanvasMouseDragged" onMousePressed="#onCanvasMousePressed" />
+            <Pane prefHeight="300" prefWidth="300" style="-fx-border-style: solid; -fx-border-color: red">
+                <Canvas disable="true" fx:id="canvas" height="300" width="300"  onMouseDragged="#onCanvasMouseDragged" onMousePressed="#onCanvasMousePressed" />
             </Pane>
             <HBox spacing="5">
                 <Button disable="true" fx:id="clearBoardButton" onAction="#onClearBoardButtonClick" text="Clear the board" />
             </HBox>
         </VBox>
-        <VBox prefWidth="400" spacing="5">
+        <VBox spacing="5" prefWidth="250">
             <Label text="Class chat room"/>
-            <TextArea fx:id="classMessageTextArea" editable="false" prefHeight="350" />
+            <TextArea fx:id="classMessageTextArea" editable="false" prefHeight="250" />
             <TextArea fx:id="messageTextArea" prefHeight="45" editable="false" />
             <HBox alignment="CENTER_RIGHT" spacing="5">
                 <Button disable="true" fx:id="sendFileButton" onAction="#onSendFileButtonClick" text="Send file ..." />
@@ -39,7 +39,7 @@
             <ListView fx:id="clientListView" />
         </VBox>
     </HBox>
-    <VBox spacing="10" prefHeight="125">
+    <VBox spacing="5" prefHeight="100">
         <Label text="System console"/>
         <TextArea editable="false" fx:id="systemConsoleTextArea"/>
     </VBox>
