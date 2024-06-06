@@ -5,16 +5,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.ImageCursor;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Base64;
@@ -32,6 +32,7 @@ public class ClassServerController {
     public TextArea classMessageTextArea;
     public Button sendFileButton;
     public ListView<String> clientListView;
+    public ColorPicker penColorPicker;
 
     public void onStartServerButtonClick(ActionEvent actionEvent) {
         Logger.init(systemConsoleTextArea);
@@ -53,14 +54,23 @@ public class ClassServerController {
         portTextField.setDisable(true);
         startServerButton.setDisable(true);
 
-
         canvas.setDisable(false);
         clearBoardButton.setDisable(false);
         sendFileButton.setDisable(false);
         sendMessageButton.setDisable(false);
         stopServerButton.setDisable(false);
         messageTextArea.setDisable(false);
+        penColorPicker.setDisable(false);
         messageTextArea.setEditable(true);
+
+        byte[] decodedBytes = Base64.getDecoder().decode(Common.PenBase64);
+        var penImage = new Image(new ByteArrayInputStream(decodedBytes));
+        var penCursor = new ImageCursor(penImage, penImage.getWidth() / 2, penImage.getHeight());
+        canvas.setCursor(penCursor);
+
+        var context = canvas.getGraphicsContext2D();
+        context.setStroke(Color.PURPLE);
+        penColorPicker.setValue(Color.PURPLE);
     }
 
     public void onStopServerButtonClick(ActionEvent actionEvent) {
@@ -129,5 +139,12 @@ public class ClassServerController {
         } else {
             Logger.log("No file selected");
         }
+    }
+
+    public void onColorPickerChanged(ActionEvent actionEvent) {
+        var context = canvas.getGraphicsContext2D();
+        var penColor = penColorPicker.getValue();
+        context.setStroke(penColor);
+        Dispatcher.send(Common.Teacher, penColor.toString(), MessageType.ChangePenColor);
     }
 }

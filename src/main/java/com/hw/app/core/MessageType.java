@@ -6,4 +6,5 @@ public enum MessageType {
     SendBoardActionStartDrawing,
     SendBoardActionDrawing,
     SendBoardActionClear,
+    ChangePenColor
 }
