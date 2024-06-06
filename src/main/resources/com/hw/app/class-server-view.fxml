@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.hw.app.ClassServerController">
+    <padding>
+        <Insets bottom="10" left="10" right="10" top="10" />
+    </padding>
+    <HBox spacing="5" alignment="CENTER_RIGHT">
+        <Label text="Server socket port"/>
+        <TextField fx:id="portTextField" text="12345"/>
+        <Button fx:id="startServerButton" style="-fx-font-weight: bold; -fx-text-fill: green;" onAction="#onStartServerButtonClick" text="START" />
+        <Button fx:id="stopServerButton" disable="true" style="-fx-font-weight: bold; -fx-text-fill: red;" onAction="#onStopServerButtonClick" text="STOP" />
+    </HBox>
+    <HBox prefHeight="465" prefWidth="920" spacing="10">
+        <VBox prefWidth="400" spacing="5">
+            <Label text="Teacher board"/>
+            <Pane prefHeight="400" prefWidth="400" style="-fx-border-style: solid; -fx-border-color: red">
+                <Canvas disable="true" fx:id="canvas" height="400" width="400"  onMouseDragged="#onCanvasMouseDragged" onMousePressed="#onCanvasMousePressed" />
+            </Pane>
+            <HBox spacing="5">
+                <Button disable="true" fx:id="clearBoardButton" onAction="#onClearBoardButtonClick" text="Clear the board" />
+            </HBox>
+        </VBox>
+        <VBox prefWidth="400" spacing="5">
+            <Label text="Class chat room"/>
+            <TextArea fx:id="classMessageTextArea" editable="false" prefHeight="350" />
+            <TextArea fx:id="messageTextArea" prefHeight="45" editable="false" />
+            <HBox alignment="CENTER_RIGHT" spacing="5">
+                <Button disable="true" fx:id="sendFileButton" onAction="#onSendFileButtonClick" text="Send file ..." />
+                <Button disable="true" fx:id="sendMessageButton" onAction="#onSendMessageButtonClick" text="Send message" />
+            </HBox>
+        </VBox>
+        <VBox spacing="5" prefWidth="100">
+            <Label text="Connected clients"/>
+            <ListView fx:id="clientListView" />
+        </VBox>
+    </HBox>
+    <VBox spacing="10" prefHeight="125">
+        <Label text="System console"/>
+        <TextArea editable="false" fx:id="systemConsoleTextArea"/>
+    </VBox>
+</VBox>
