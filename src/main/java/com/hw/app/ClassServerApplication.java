@@ -17,7 +17,7 @@ public class ClassServerApplication extends Application {
 
         stage.setResizable(false);
 
-        stage.iconifiedProperty().addListener((observable, oldValue, newValue) -> {
+        stage.iconifiedProperty().addListener((_, _, _) -> {
             stage.setIconified(false);
         });
 

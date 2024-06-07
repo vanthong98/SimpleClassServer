@@ -95,7 +95,7 @@ public class ClassServerController {
         context.moveTo(mouseEvent.getX(), mouseEvent.getY());
         context.stroke();
 
-        Dispatcher.send(Common.Teacher, mouseEvent.getX() + ";" + mouseEvent.getY(), MessageType.SendBoardActionStartDrawing);
+        Dispatcher.send(Common.Teacher, mouseEvent.getX() + ";" + mouseEvent.getY(), MessageType.StartDrawing);
         Logger.log("Start drawing line...");
     }
 
@@ -103,14 +103,14 @@ public class ClassServerController {
         var context = canvas.getGraphicsContext2D();
         context.lineTo(mouseEvent.getX(), mouseEvent.getY());
         context.stroke();
-        Dispatcher.send(Common.Teacher,mouseEvent.getX() + ";" + mouseEvent.getY(), MessageType.SendBoardActionDrawing);
+        Dispatcher.send(Common.Teacher,mouseEvent.getX() + ";" + mouseEvent.getY(), MessageType.Drawing);
     }
 
     public void onClearBoardButtonClick(ActionEvent actionEvent) {
         var context = canvas.getGraphicsContext2D();
         context.setFill(Color.WHITESMOKE); // Set the fill color to white (or any color you desire)
         context.fillRect(1, 1, context.getCanvas().getWidth() -2, context.getCanvas().getHeight()-2);
-        Dispatcher.send(Common.Teacher,"", MessageType.SendBoardActionClear);
+        Dispatcher.send(Common.Teacher,"", MessageType.ClearBoard);
         Logger.log("Cleared board");
     }
 

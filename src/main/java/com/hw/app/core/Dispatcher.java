@@ -55,9 +55,9 @@ public class Dispatcher extends Thread {
         }
     }
 
-    public static PriorityBlockingQueue <String> getQueue(String key){
+    public static PriorityBlockingQueue <String> getQueue(String clientId){
         synchronized (QUEUES){
-            return QUEUES.get(key);
+            return QUEUES.get(clientId);
         }
     }
 
@@ -93,7 +93,7 @@ public class Dispatcher extends Thread {
 
     public void run() {
 
-        Logger.log("Message dispatcher is running ...");
+        Logger.log("Dispatcher is running ...");
 
         String message;
         do {

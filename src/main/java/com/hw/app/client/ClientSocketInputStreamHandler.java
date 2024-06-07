@@ -2,6 +2,7 @@ package com.hw.app.client;
 
 import com.hw.app.core.Common;
 import com.hw.app.core.Dispatcher;
+import com.hw.app.core.Logger;
 import com.hw.app.core.MessageType;
 
 import java.io.BufferedReader;
@@ -27,15 +28,16 @@ public class ClientSocketInputStreamHandler extends Thread {
                 if (message.isEmpty()){
                     continue;
                 }
+                
                 Dispatcher.sendToClassMessage(_clientId, message);
                 Dispatcher.send(_clientId, message, MessageType.SendMessage);
 
             } while (!Common.ExitMessage.equals(message));
 
         } catch (Exception ex) {
-            System.out.println("Error: " + ex.getMessage());
+            Logger.log("Error: " + ex.getMessage());
         } finally {
-            System.out.println("Client " + _clientId + " disconnected.");
+            Logger.log("Client " + _clientId + " disconnected.");
             Dispatcher.removeClient(_clientId);
         }
     }

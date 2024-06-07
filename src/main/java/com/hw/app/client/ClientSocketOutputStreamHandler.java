@@ -8,18 +8,20 @@ import java.io.PrintWriter;
 
 public class ClientSocketOutputStreamHandler extends Thread {
     private final OutputStream _socketOutputStream;
-    private final String _id ;
+    private final String _clientId ;
 
-    public ClientSocketOutputStreamHandler(String id, OutputStream socketOutputStream) {
+    public ClientSocketOutputStreamHandler(String clientId, OutputStream socketOutputStream) {
         _socketOutputStream = socketOutputStream;
-        _id = id;
+        _clientId = clientId;
     }
 
     private String getMessage(){
-        var queue = Dispatcher.getQueue(_id);
+        var queue = Dispatcher.getQueue(_clientId);
+
         if (queue == null) {
             return null;
         }
+
         synchronized (queue) {
             return queue.poll();
         }

@@ -28,21 +28,18 @@ public class ServerSocketHandler extends Thread {
                     Logger.log("Server socket is waiting for a new connection");
 
                     socket = _serverSocket.accept();
-
                     var clientId = Dispatcher.getNewClientId();
-
                     Logger.log("Server socket is accepted a new connection with clientId " + clientId);
 
                     Dispatcher.addClient(clientId);
 
                     var socketInputHandler = new ClientSocketInputStreamHandler(clientId, socket.getInputStream());
+
                     socketInputHandler.start();
 
                     var socketOutputHandler = new ClientSocketOutputStreamHandler(clientId, socket.getOutputStream());
 
                     socketOutputHandler.start();
-
-
                 }
                 while (true);
             }
